@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  edge-service:
+    image: soundarya/edge-server:1.0.0
+    container_name: ecommerce-edge-container
+    ports:
+      - "8080:8080"
+    networks:
+      - internal_network
+
+  product-service:
+    image: soundarya/product-server:1.0.0
+    container_name: product-container
+    networks:
+      - internal_network
+
+  order-service:
+    image: soundarya/order-server:1.0.0
+    container_name: order-container
+    networks:
+      - internal_network
+
+
+
+  eureka-service:
+    image: soundarya/eureka-server:1.0.0
+    container_name: ecommerce-eureka-container
+    networks:
+      - internal_network
+    ports:
+      - "8761:8761"
+
+networks:
+  internal_network:
+    external: false
+    name: soundarya-network
